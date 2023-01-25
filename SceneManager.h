@@ -1,7 +1,7 @@
 #pragma once
 #include <stdio.h>
 
-class SceneManager {
+class SceneManager final{
 	//インスタンス
 private:
 	SceneManager();
@@ -11,6 +11,9 @@ public:
 
 	static SceneManager* GetInstance();
 
+	SceneManager(const SceneManager& obj) = delete;
+
+	SceneManager& operator=(const SceneManager& obj) = delete;
 //メンバ変数
 private:
 	int waitTime;
