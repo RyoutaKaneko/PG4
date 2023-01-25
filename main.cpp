@@ -2,27 +2,13 @@
 int Enemy::enemyCount;
 
 int main() {
-	//“G‚ğ5‘Ì—pˆÓ
-	Enemy* enemys[5];
-	for (int i = 0; i < 5; i++) {
-		enemys[i] = new Enemy;
-	}
-	//“G‚Ì”‚ğ•\¦
-	printf("“G‚Ì‘”‚Í:%d\n", Enemy::enemyCount);
+	Enemy* enemy = new Enemy;
+	int num = 0;
 
-	//1l“|‚·
-	enemys[3]->isAlive = false;
-
-	//ˆêl“|‚³‚ê‚Ä‚¢‚½‚ç‘Sˆõ“|‚·
-	for (int i = 0; i < 5; i++) {
-		if (enemys[i]->isAlive == false) {
-			for (int i = 0; i < 5; i++) {
-				delete enemys[i];
-			}
-		}
+	while (num < 10) {
+		enemy->Update();
+		num++;
 	}
-	//“G‚Ì”‚ğ•\¦
-	printf("“G‚Ì‘”‚Í:%d\n", Enemy::enemyCount);
 
 	return 0;
 }
