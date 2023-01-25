@@ -1,31 +1,57 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <windows.h>
-#include <time.h>
-#include <iostream>
-#include <functional>
+#include "stdio.h"
+#include <list>
 
-int main(void) {
-
-	int number = 0;
-	int waitTime = 3;
-
-	srand(time(nullptr));
-	int dice = rand() % 6 + 1;
-
-	//予想を入力
-	printf("奇数だと思ったら1を、偶数だと思ったら0を入力してください\n");
-	scanf_s("[ %d ]", &number);
-
-	// 抽選開始
-	std::function<void()> diceDrawing = [=]() {(dice % 2 == number) ? printf("あたり\n") : printf("はずれ\n"); };
-
-	// 待ち時間関数
-	std::function<void(std::function<void()>, int)> SetTimeout = [](std::function<void()> fx, int waitTime) {
-		Sleep(waitTime * 1000); fx();
+int main() {
+//山手線(1970)
+	std::list<const char*> stations = {"tokyo","kanda","akihabara","okachimachi","ueno","uguisudani",
+		"nippori","tabata","komagome","sugamo","ootuka","ikebukuro","meziro","takadanobaba",
+		"shinookubo","shinjuku","yoyogi","harajuku","shibuya","ebisu","meguro","gotanda",
+		"oosaki","shinagawa","tamachi","hamamatuchou","shinbashi","yuurakuchou"
 	};
+	//イテレーター
+	std::list<const char*>::iterator itr;
 
-	SetTimeout(diceDrawing, waitTime);
+	//最初の値を参照
+	itr = stations.begin();
+	//1970ver
+	for (int i = 0; i < stations.size(); i++) {
+		printf("%s\n", *itr);
+		itr++;
+	}
+	printf("\n///////////////////////////\n");
+
+	/////1971年西日暮里駅追加
+	for (std::list<const char*>::iterator itr = stations.begin(); itr != stations.end(); itr++) {
+		if (*itr == "tabata") {
+			itr = stations.insert(itr, "nishinippori");
+			itr++;
+		}
+	}
+
+	//最初の値を参照
+	itr = stations.begin();
+	//2019ver
+	for (int i = 0; i < stations.size(); i++) {
+		printf("%s\n", *itr);
+		itr++;
+	}
+	printf("\n///////////////////////////\n");
+	
+	/////2020年高輪ゲートウェイ駅追加
+	for (std::list<const char*>::iterator itr = stations.begin(); itr != stations.end(); itr++) {
+		if (*itr == "tamachi") {
+			itr = stations.insert(itr, "takawage-toway");
+			itr++;
+		}
+	}
+
+	//最初の値を参照
+	itr = stations.begin();
+	//2022ver
+	for (int i = 0; i < stations.size(); i++) {
+		printf("%s\n", *itr);
+		itr++;
+	}
 
 	return 0;
 }
